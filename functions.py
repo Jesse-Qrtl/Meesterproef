@@ -8,6 +8,19 @@ def make_list(file_path):
 def valid_guess(guess, guesses):
     return guess in guesses
 
+def evaluate_guess(guess, word):
+    result = ""
+
+    for i in range(len(word)):
+        if guess[i] == word[i]:
+            result += "\033[32m" + guess[i] # groen
+        elif guess[i] in word:
+            result += "\033[33m" + guess[i] # geel
+        else:
+            result += "\033[31m" + guess[i] # rood
+            
+    return result
+
 def calculate_score(guess, word):
     score = 0
     counted_letters = set()
@@ -19,25 +32,12 @@ def calculate_score(guess, word):
     
     return score
 
-def evaluate_guess(guess, word):
-    str = ""
-
-    for i in range(len(word)):
-        if guess[i] == word[i]:
-            str += "\033[32m" + guess[i] # groen
-        else:
-            if guess[i] in word:
-                str += "\033[33m" + guess[i] # geel
-            else:
-                str += "\033[31m" + guess[i] # rood
-    return str
-
 def wordle(guesses, answers):
     print("Welcome to Wordle! Get 6 chances to guess a 5 letter word.")
     secret_word = random.choice(answers).lower()
 
-    attempts = 1
-    max_attempts = 6
+    attempts = 0
+    max_attempts = 5
     total_score = 0
 
     while attempts <= max_attempts:
@@ -49,6 +49,7 @@ def wordle(guesses, answers):
 
         if guess == secret_word:
             print("Congratulations! You guessed the word:", secret_word)
+            attempts = 0
             break
 
         attempts += 1
@@ -56,3 +57,12 @@ def wordle(guesses, answers):
         total_score += round_score
         feedback = evaluate_guess(guess, secret_word)
         print(feedback)
+
+def bingo_ball_amount():
+    pass
+
+def bingo_ball_numbers():
+    pass        
+
+def bingo_cart():
+    pass
