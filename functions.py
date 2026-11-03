@@ -64,5 +64,27 @@ def bingo_ball_amount():
 def bingo_ball_numbers():
     pass        
 
-def bingo_cart():
-    pass
+def generate_bingo_cart():
+    columns = [
+        random.sample(range(1, 16), 5),
+        random.sample(range(16, 31), 5),
+        random.sample(range(31, 46), 5),
+        random.sample(range(46, 61), 5),
+        random.sample(range(61, 76), 5)
+    ]
+
+    cart = []
+    for row_index in range(5):
+        row = []
+        for column_index in range(5):
+            if row_index == 2 and column_index == 2:
+                row.append("FREE")
+            else:
+                row.append(columns[column_index][row_index])
+        cart.append(row)
+
+
+    return cart
+
+print("Welcome to Bingo! Here is your bingo cart:")
+print(generate_bingo_cart())
