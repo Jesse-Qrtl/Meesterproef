@@ -36,8 +36,8 @@ def wordle(guesses, answers):
     print("Welcome to Wordle! Get 6 chances to guess a 5 letter word.")
     secret_word = random.choice(answers).lower()
 
-    attempts = 0
-    max_attempts = 5
+    attempts = 1
+    max_attempts = 6
     total_score = 0
 
     while attempts <= max_attempts:
@@ -58,11 +58,11 @@ def wordle(guesses, answers):
         feedback = evaluate_guess(guess, secret_word)
         print(feedback)
 
-def bingo_ball_amount():
-    pass
+def bingo_ball_amount(points):
+    return points // 5
 
 def bingo_ball_numbers():
-    pass        
+    pass
 
 def generate_bingo_cart():
     columns = [
@@ -83,8 +83,4 @@ def generate_bingo_cart():
                 row.append(columns[column_index][row_index])
         cart.append(row)
 
-
     return cart
-
-print("Welcome to Bingo! Here is your bingo cart:")
-print(generate_bingo_cart())
