@@ -13,11 +13,11 @@ def evaluate_guess(guess, word):
 
     for i in range(len(word)):
         if guess[i] == word[i]:
-            result += "\033[32m" + guess[i] # groen
+            result += "\033[32m" + guess[i] + "\033[0m" # groen
         elif guess[i] in word:
-            result += "\033[33m" + guess[i] # geel
+            result += "\033[33m" + guess[i] + "\033[0m" # geel
         else:
-            result += "\033[31m" + guess[i] # rood
+            result += "\033[31m" + guess[i] + "\033[0m" # rood
             
     return result
 
@@ -33,7 +33,7 @@ def calculate_score(guess, word):
     return score
 
 def wordle(guesses, answers):
-    print("Welcome to Wordle! Get 6 chances to guess a 5 letter word.")
+    print("Welcome to Lingo! Get 6 chances to guess a 5 letter word.")
     secret_word = random.choice(answers).lower()
 
     attempts = 1
@@ -52,11 +52,17 @@ def wordle(guesses, answers):
             attempts = 0
             break
 
+        if attempts == max_attempts:
+            print("\nSorry, you've used all your attempts. The secret word was:", secret_word)
+            break
+
         attempts += 1
         round_score = calculate_score(guess, secret_word)
         total_score += round_score
         feedback = evaluate_guess(guess, secret_word)
         print(feedback)
+        print("Try again! You have " + str(max_attempts - attempts + 1) + " attempts left.\n")
+
 
 def bingo_ball_amount(points):
     return points // 5
